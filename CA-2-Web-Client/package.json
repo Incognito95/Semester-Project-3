@@ -1,0 +1,20 @@
+{
+  "name": "CA-2-Web-Client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Incognito95/CA-2-Web-Client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Incognito95/CA-2-Web-Client/issues"
+  },
+  "homepage": "https://github.com/Incognito95/CA-2-Web-Client#readme"
+}
