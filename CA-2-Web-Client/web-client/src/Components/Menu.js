@@ -44,7 +44,7 @@ function Menu () {
                 </ul>
                 <form className="d-flex">
                     <NavLink exact active className="active nav-link text-black" to="#">
-                        <p>You are now logged in as: </p>
+                        You are now logged in as:
                     </NavLink>
                     <button onClick={logout} className="btn btn-success btn-logout">Logout</button>
                 </form>
