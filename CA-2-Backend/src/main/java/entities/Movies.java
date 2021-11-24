@@ -4,19 +4,14 @@ public class Movies {
     private int id;
     private String title;
     private String description;
+    private String images;
 
     public Movies() {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.images = images;
     }
-
-    public Movies(int movie_id, String movie_title, String movie_description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-    }
-
 
     public int getId() {
         return id;
@@ -40,5 +35,13 @@ public class Movies {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 }

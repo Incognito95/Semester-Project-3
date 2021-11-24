@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import {Link} from 'react-router-dom';
-
+// import { path } from "../Images/";
 
 const AllMovies = () => {
     const [moviesList, setJokesList] = useState([]);
@@ -16,6 +15,7 @@ const AllMovies = () => {
         return () => clearInterval(timer);
     });
 
+
     return (
             <div className="">
                  {moviesList.map(movies => {
@@ -25,7 +25,7 @@ const AllMovies = () => {
                                  <div className="col-sm">
                                      <div className="mt-4 card-group">
                                         <div className="card">
-                                             <img src="..." className="card-img-top" alt="..." />
+                                             {/*<img src={path + movies.images} className="card-img-top" alt="..." />*/}
                                             <a href="/moviepage/">
                                             <div className="card-body">
                                                     <h5 className="card-title">{movies.title}</h5>
@@ -49,7 +49,7 @@ const AllMovies = () => {
                                  <div className="col-sm">
                                      <div className="mt-4 card-group">
                                          <div className="card">
-                                             <img src="..." className="card-img-top" alt="..." />
+                                             <img src="{movies.movie_images}" className="card-img-top" alt="..." />
                                              <div className="card-body">
                                                  <h5 className="card-title">{movies.title}</h5>
                                                  {/*<p className="card-text">{movies.description}</p>*/}

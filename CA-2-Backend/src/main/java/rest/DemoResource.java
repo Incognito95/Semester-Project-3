@@ -101,12 +101,13 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("movies")
     public List<Movies> ShowAllMovies() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description FROM movies");
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies");
         while (rs.next()) {
             Movies movie = new Movies();
             movie.setId(rs.getInt("movie_id"));
             movie.setTitle(rs.getString("movie_title"));
             movie.setDescription(rs.getString("movie_description"));
+            movie.setImages(rs.getString("movie_images"));
             movies.add(movie);
         }
         return movies;
@@ -116,12 +117,13 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("moviepage")
     public List<Movies> MoviePage() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description FROM movies WHERE movie_id = movie_id");
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies WHERE movie_id = movie_id");
         if (rs.next()) {
             Movies movie = new Movies();
             movie.setId(rs.getInt("movie_id"));
             movie.setTitle(rs.getString("movie_title"));
             movie.setDescription(rs.getString("movie_description"));
+            movie.setImages(rs.getString("movie_images"));
             movies.add(movie);
         }
         return movies;
