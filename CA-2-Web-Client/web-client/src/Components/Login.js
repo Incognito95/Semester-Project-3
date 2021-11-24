@@ -32,7 +32,7 @@ function Login({ login }) {
 
                             <label htmlFor="show-password" className="Control-label Control-label--showPassword"></label>
 
-                            <input type="password" id="password" name="password" placeholder="password" autoComplete="off" autoCapitalize="off" autoCorrect="off"
+                            <input type="password" id="password" name="password" placeholder="Password" autoComplete="off" autoCapitalize="off" autoCorrect="off"
                                 required pattern="{4-5}" className="ControlInput ControlInput--password" />
 
                                 <label htmlFor="password" className="Control-label Control-label--password">Password</label>

@@ -14,11 +14,10 @@ import {
 
 import Login from "./Components/Login";
 import Menu from "./Components/Menu";
-import Welcome from "./Components/Welcome";
+import Home from "./Components/Home";
 import NoMatch from "./Components/NoMatch";
-import Chuck from "./Components/Chuck";
-import Dad from "./Components/Dad";
-import JokeAPI from "./Components/JokeAPI";
+import AllMovies from "./Components/AllMovies";
+import MoviePage from "./Components/MoviePage";
 
 import React, { useState,useEffect } from "react";
 import facade from "./ApiFacade";
@@ -53,22 +52,19 @@ function App() {
                 (<div>
                     <Menu />
                     <Switch>
-                     <Route exact path="/">
-                     <Welcome />
-                     </Route>
-                     <Route exact path="/chuck">
-                     <Chuck />
-                     </Route>
-                     <Route exact path="/dad">
-                     <Dad />
-                     </Route>
-                        <Route exact path="/jokeapi">
-                            <JokeAPI />
+                         <Route exact path="/">
+                         <Home />
+                         </Route>
+                            <Route exact path="/allmovies">
+                                <AllMovies />
+                            </Route>
+                        <Route path="/login">
+                                <Login/>
                         </Route>
-                    <Route path="/login">
-                    <Login/>
-                    </Route>
-                    <NoMatch />
+                        <Route exact path="/moviepage">
+                             <MoviePage />
+                        </Route>
+                        <NoMatch />
                     </Switch>
                     <LoggedIn />
                 </div>)}

@@ -1,21 +1,24 @@
 import {NavLink} from 'react-router-dom';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import facade from "../ApiFacade";
+import {forEach} from "react-bootstrap/ElementChildren";
 
-class Menu extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            opened: false
-        };
-    }
-
-    render() {
-
+function Menu () {
 
     const logout = () => { facade.logout() }
+
+    const [usersList, setUsers] = useState([]);
+    useEffect(() => {
+        const timer = setInterval( () => {
+            fetch("http://localhost:8080/devops_starter_war_exploded/api/info/user")
+                .then(res => res.json())
+                .then(data => {
+                    setUsers(data);
+                    console.log(usersList);
+                });
+        }, 3000);
+        return () => clearInterval(timer);
+    });
 
     return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,30 +32,19 @@ class Menu extends React.Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <NavLink exact active className="active nav-link" to="/">Welcome</NavLink>
+                        <NavLink exact active className="active nav-link btn btn-primary text-white" to="/">Home</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink exact active className="active nav-link" to="chuck">Chuck Norris Jokes</NavLink>
+                        <NavLink exact active className="active nav-link" to="#"></NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink exact active className="active nav-link" to="dad">Dad Jokes</NavLink>
+                        <NavLink exact active className="active nav-link btn btn-primary text-white" to="/allmovies">All Movies</NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink exact active className="active nav-link" to="jokeapi">Joke API</NavLink>
-                    </li>
+                    <input className="search-bar" type="search" placeholder="Search" aria-label="Search" />
                 </ul>
                 <form className="d-flex">
-                    <NavLink exact active className="active nav-link text-black" to="#" id="user">
-                        {(() => {
-                            const admin = "Admin";
-                            const user = "User";
-
-                            if (admin == admin) {
-                                return "You are now logged in as: " + admin;
-                            } else if (admin != admin) {
-                                return "You are now logged in as: " + user;
-                            }
-                        })()}
+                    <NavLink exact active className="active nav-link text-black" to="#">
+                        <p>You are now logged in as: </p>
                     </NavLink>
                     <button onClick={logout} className="btn btn-success btn-logout">Logout</button>
                 </form>
@@ -60,7 +52,6 @@ class Menu extends React.Component {
         </div>
     </nav>
         )
-    }
 }
 
 

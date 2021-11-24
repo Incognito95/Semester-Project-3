@@ -1,4 +1,4 @@
-function Welcome() {
+function Home() {
 
     return (
         <div className="mt-5">
@@ -23,4 +23,4 @@ function Welcome() {
     )
 }
 
-export default Welcome;
+export default Home;
