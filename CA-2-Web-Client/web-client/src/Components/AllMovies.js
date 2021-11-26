@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 // import { path } from "../Images/";
 
 const AllMovies = () => {
-    const [moviesList, setJokesList] = useState([]);
+    const [movieList, setMovieList] = useState([]);
     useEffect(() => {
         const timer = setInterval( () => {
             fetch("http://localhost:8080/devops_starter_war_exploded/api/info/movies")
                 .then(res => res.json())
                 .then(data => {
-                    setJokesList(data);
-                    console.log(moviesList);
+                    setMovieList(data)
                 });
         }, 3000);
         return () => clearInterval(timer);
@@ -18,7 +17,7 @@ const AllMovies = () => {
 
     return (
             <div className="">
-                 {moviesList.map(movies => {
+                 {movieList.map(movies => {
                      return (
                          <div className="container">
                              <div className="row">
