@@ -64,6 +64,9 @@ function App() {
                         <Route exact path="/moviepage">
                              <MoviePage />
                         </Route>
+                        <Route exact path="/moviepage/:id">
+                            <MoviePage />
+                        </Route>
                         <NoMatch />
                     </Switch>
                     <LoggedIn />

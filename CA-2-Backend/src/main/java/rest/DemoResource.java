@@ -101,7 +101,7 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("movies")
     public List<Movies> ShowAllMovies() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies");
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies WHERE movie_id = movie_id");
         while (rs.next()) {
             Movies movie = new Movies();
             movie.setId(rs.getInt("movie_id"));
