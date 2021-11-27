@@ -13,6 +13,13 @@ public class Movies {
         this.images = images;
     }
 
+    public Movies(int id, String images, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.images = images;
+    }
+
     public int getId() {
         return id;
     }

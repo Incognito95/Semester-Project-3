@@ -1,5 +1,5 @@
 /* ------ welcome page ---- */
-h3, .list, .instructions-box {
+.welcome-header, .instructions-header, .list, .instructions-box {
     margin-left: 20px;
 }
 
@@ -14,7 +14,7 @@ h3, .list, .instructions-box {
 
 /* ------ result box ---- */
 @media (min-width: 1300px) {
-.container {
+.movies {
         max-width: 360px !important;
         display: inline-block !important;
     }
@@ -332,4 +332,6 @@ input[type="search"] {
     text-indent: 15px;
 }
 
+
+/* ------- show one movie ------ */
 

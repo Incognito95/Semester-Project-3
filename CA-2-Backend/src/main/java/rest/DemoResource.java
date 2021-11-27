@@ -74,21 +74,6 @@ public class DemoResource {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
-    
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("chucknorris")
-//    public String chuckNorris() {
-//        // https://api.chucknorris.io/jokes/random
-//        return "{\"msg\": \"chuck norris jokes: " + "\"}";
-//    }
-//
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("dadjokes")
-//    public String dadJokes() {
-//        return "{\"msg\": \"Dad jokes: " + "\"}";
-//    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -101,7 +86,7 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("movies")
     public List<Movies> ShowAllMovies() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies WHERE movie_id = movie_id");
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies");
         while (rs.next()) {
             Movies movie = new Movies();
             movie.setId(rs.getInt("movie_id"));
@@ -120,7 +105,6 @@ public class DemoResource {
         ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies WHERE movie_id = movie_id");
         if (rs.next()) {
             Movies movie = new Movies();
-            movie.setId(rs.getInt("movie_id"));
             movie.setTitle(rs.getString("movie_title"));
             movie.setDescription(rs.getString("movie_description"));
             movie.setImages(rs.getString("movie_images"));
@@ -133,7 +117,7 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("user")
     public List<User> ShowUserByLoggedIn() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT user_name, FROM users");
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT user_name FROM users");
         while (rs.next()) {
             User user = new User();
             user.setUserName(rs.getString("user_name"));
@@ -155,11 +139,10 @@ public class DemoResource {
     }
 
     // running methods
-    public void main(String[] args) throws SQLException {
-        ShowUserByLoggedIn(); // show user based on logged in user
+    public void main(String[] args) throws Exception {
+        ShowUserByLoggedIn(); // show user based on login
         ShowAllMovies(); // show all movies
-//        MoviePage(); // show one movie
-
+        MoviePage(); // show one movie
 
     }
 

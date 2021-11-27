@@ -2,7 +2,7 @@ function Home() {
 
     return (
         <div className="mt-5">
-            <h3>Velkommen til vores hjemmeside, her kan du få nogen:</h3>
+            <h3 className="welcome-header">Velkommen til vores hjemmeside, her kan du få nogen:</h3>
             <ul className="list">
                 <li>Chuck Norris jokes</li>
                 <li>Dad jokes</li>
@@ -11,7 +11,7 @@ function Home() {
             </ul>
 
 
-            <h3 className="mt-5">Instructions on how to use the Quick Start Project.</h3>
+            <h3 className="mt-5 instructions-header">Instructions on how to use the Quick Start Project.</h3>
             <div class="col-md-6">
                 <div class="p-4 bg-light instructions-box">
                     <li className="instructions-list">Open the project in your preferred code editor</li>

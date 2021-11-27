@@ -20,7 +20,7 @@ const AllMovies = () => {
             <div className="">
                  {moviesList.map(movies => {
                      return (
-                         <div className="container">
+                         <div className="container movies">
                              <div className="row">
                                      <div className="mt-4 card-group">
                                         <div className="card">
