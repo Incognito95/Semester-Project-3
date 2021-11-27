@@ -13,8 +13,14 @@ h3, .list, .instructions-box {
 
 
 /* ------ result box ---- */
-.card-group > .card {
-    width: 50%;
+@media (min-width: 1300px) {
+.container {
+        max-width: 360px !important;
+        display: inline-block !important;
+    }
+}
+
+.card {
     height: 500px;
 }
 
@@ -22,7 +28,6 @@ h3, .list, .instructions-box {
     background-color: #F8F9FA;
     cursor: pointer;
 }
-
 
 
 

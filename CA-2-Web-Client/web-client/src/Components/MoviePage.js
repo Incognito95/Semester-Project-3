@@ -22,8 +22,8 @@ const MoviePage = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-sm">
-                                <div className="mt-4 card-group">
-                                    <div className="card">
+                                <div className="mt-4">
+                                    <div className="">
                                         <img src="..." className="card-img-top" alt="..." />
                                         <div className="card-body">
                                             <h5 className="card-title">{movies.title}</h5>
