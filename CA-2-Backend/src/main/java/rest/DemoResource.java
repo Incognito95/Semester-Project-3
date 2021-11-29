@@ -1,5 +1,6 @@
 package rest;
 
+import entities.MovieInfo;
 import entities.Movies;
 import entities.User;
 
@@ -10,6 +11,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.POST;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -26,7 +28,11 @@ import utils.EMF_Creator;
 public class DemoResource {
 
     List<Movies> movies = new ArrayList<>();
+    List<Movies> info = new ArrayList<Movies>();
     List<User> users = new ArrayList<>();
+    List<MovieInfo> comment = new ArrayList<>();
+    List<MovieInfo> ratings = new ArrayList<>();
+    List<MovieInfo> comments = new ArrayList<>();
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     @Context
@@ -57,14 +63,6 @@ public class DemoResource {
         }
     }
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("user")
-//    @RolesAllowed("user")
-//    public String getFromUser() {
-//        String thisuser = securityContext.getUserPrincipal().getName();
-//        return "{\"msg\": \"Hello to User: " + thisuser + "\"}";
-//    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -84,15 +82,82 @@ public class DemoResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("movies")
-    public List<Movies> ShowAllMovies() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies");
+    @Path("user")
+    public List<User> GetInfoFromUser() throws SQLException {
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT user_name FROM users");
+        while (rs.next()) {
+            User user = new User();
+            user.setUserName(rs.getString("user_name"));
+            users.add(user);
+        }
+        return users;
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("AddMovieComment")
+    public List<MovieInfo> AddMovieComment() throws SQLException {
+        ResultSet rs = getConnection().createStatement().executeQuery("INSERT INTO movie_info SET comment = ?");
+        while (rs.next()) {
+            MovieInfo movieinfo = new MovieInfo();
+            movieinfo.setComment(rs.getString("comment"));
+            comment.add(movieinfo);
+        }
+        return comment;
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("rating")
+    public List<Movies> AddMovieRating() throws SQLException {
+        ResultSet rs = getConnection().createStatement().executeQuery("INSERT INTO movie_info SET comment = ?");
         while (rs.next()) {
             Movies movie = new Movies();
             movie.setId(rs.getInt("movie_id"));
-            movie.setTitle(rs.getString("movie_title"));
-            movie.setDescription(rs.getString("movie_description"));
-            movie.setImages(rs.getString("movie_images"));
+            movie.setTitle(rs.getString("title"));
+            movies.add(movie);
+        }
+        return movies;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("DisplayMovieRatings")
+    public List<MovieInfo> DisplayMovieRatings() throws SQLException {
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT rating FROM movie_info");
+        while (rs.next()) {
+            MovieInfo rating = new MovieInfo();
+            rating.setRating(rs.getString("rating"));
+            ratings.add(rating);
+        }
+        return ratings;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("DisplayMovieComments")
+    public List<MovieInfo> DisplayMovieComments() throws SQLException {
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT fk_user_name, comment FROM movie_info");
+        while (rs.next()) {
+            MovieInfo comment = new MovieInfo();
+            comment.setUsername(rs.getString("fk_user_name"));
+            comment.setComment(rs.getString("comment"));
+            comments.add(comment);
+        }
+        return comments;
+    }
+
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("movies")
+    public List<Movies> ShowAllMovies() throws SQLException {
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, title FROM movies");
+        while (rs.next()) {
+            Movies movie = new Movies();
+            movie.setId(rs.getInt("movie_id"));
+            movie.setTitle(rs.getString("title"));
             movies.add(movie);
         }
         return movies;
@@ -102,29 +167,29 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("moviepage")
     public List<Movies> MoviePage() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, movie_title, movie_description, movie_images FROM movies WHERE movie_id = movie_id");
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT title, description FROM movies WHERE movie_id = movie_id");
         if (rs.next()) {
-            Movies movie = new Movies();
-            movie.setTitle(rs.getString("movie_title"));
-            movie.setDescription(rs.getString("movie_description"));
-            movie.setImages(rs.getString("movie_images"));
-            movies.add(movie);
+            Movies movieinfo = new Movies();
+            movieinfo.setTitle(rs.getString("title"));
+            movieinfo.setDescription(rs.getString("description"));
+            info.add(movieinfo);
         }
-        return movies;
+        return info;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("user")
-    public List<User> ShowUserByLoggedIn() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT user_name FROM users");
+    @Path("search")
+    public List<Movies> SearchForMovie() throws SQLException {
+        ResultSet rs = getConnection().createStatement().executeQuery("SELECT * FROM movies WHERE title LIKE '%far til fire %' AND title LIKE '%toy story%'");
         while (rs.next()) {
-            User user = new User();
-            user.setUserName(rs.getString("user_name"));
-            users.add(user);
+            Movies movieinfo = new Movies();
+            movieinfo.setTitle(rs.getString("title"));
+            info.add(movieinfo);
         }
-        return users;
+        return info;
     }
+
 
     // database connection
     public Connection getConnection() throws SQLException {
@@ -140,9 +205,15 @@ public class DemoResource {
 
     // running methods
     public void main(String[] args) throws Exception {
-        ShowUserByLoggedIn(); // show user based on login
+//        ShowUserByLoggedIn(); // show user based on login
         ShowAllMovies(); // show all movies
         MoviePage(); // show one movie
+        GetInfoFromUser(); // show user
+        AddMovieComment(); // add comment to movie
+        DisplayMovieComments(); // display comments for a movie
+        AddMovieRating(); // display ratings for a movie
+        DisplayMovieRatings(); // display ratings for a movie
+        SearchForMovie();
 
     }
 

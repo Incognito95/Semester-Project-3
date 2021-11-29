@@ -7,19 +7,6 @@ function Menu () {
 
     const logout = () => { facade.logout() }
 
-    const [usersList, setUsers] = useState([]);
-    useEffect(() => {
-        const timer = setInterval( () => {
-            fetch("http://localhost:8080/devops_starter_war_exploded/api/info/user")
-                .then(res => res.json())
-                .then(data => {
-                    setUsers(data);
-                    console.log(usersList);
-                });
-        }, 3000);
-        return () => clearInterval(timer);
-    });
-
     return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
@@ -40,7 +27,7 @@ function Menu () {
                     <li className="nav-item">
                         <NavLink exact active className="active nav-link btn btn-primary text-white" to="/allmovies">All Movies</NavLink>
                     </li>
-                    <input className="search-bar" type="search" placeholder="Search" aria-label="Search" />
+                        <input className="search-bar" type="search" placeholder="Search" aria-label="Search" />
                 </ul>
                 <form className="d-flex">
                     <NavLink exact active className="active nav-link text-black" to="#">

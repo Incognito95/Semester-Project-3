@@ -2,18 +2,34 @@ import {useState, useEffect} from "react";
 
 
 const MoviePage = () => {
-    const [moviesList, setJokesList] = useState([]);
+    // show movie
+    const [moviesList, setMovieList] = useState([]);
     useEffect(() => {
         const timer = setInterval(() => {
             fetch("http://localhost:8080/devops_starter_war_exploded/api/info/moviepage")
                 .then(res => res.json())
                 .then(data => {
-                    setJokesList(data);
+                    setMovieList(data);
                     console.log(moviesList);
                 });
         }, 3000);
         return () => clearInterval(timer);
     });
+
+    // show comments
+    const [comments, setComments] = useState([]);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            fetch("http://localhost:8080/devops_starter_war_exploded/api/info/DisplayMovieComments")
+                .then(res => res.json())
+                .then(data => {
+                    setComments(data);
+                    console.log(moviesList);
+                });
+        }, 3000);
+        return () => clearInterval(timer);
+    });
+
 
     return (
     <div className="container mt-5 mb-5">
@@ -55,19 +71,33 @@ const MoviePage = () => {
                                                 </div>
                                             </div>
                                             <p className="about">{movies.description}</p>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+
                         <div className="comments">
-                            <form action="">
-                                <h3 htmlFor="">Comment</h3>
-                                <textarea name="" className="form-control mt-3" id="" cols="30" rows="10"></textarea>
-                                <button type="submit" className="btn btn-success mt-3 float-end">Send</button>
+                            <form onChange="">
+                                <h3>Post a comment</h3>
+                                <textarea name="comment" className="form-control mt-3" id="" cols="30" rows="10" name="comment"></textarea>
+                                <button onClick="" type="submit" className="btn btn-success mt-3 float-end">Send</button>
                             </form>
+                        </div>
+
+                        <div className="show-comments">
+                            <h3>Comments</h3>
+                            {comments.map(comment => {
+                                return (
+                            <div className="p-5 mb-4 bg-light mt-3">
+                                    <div className="container-fluid py-5">
+                                        <p>{comment.username}</p>
+                                        <p>{comment.comment}</p>
+                                    </div>
+                            </div>
+                                )
+                            })}
                         </div>
 
                     </div>
