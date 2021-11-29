@@ -3,14 +3,14 @@ import {useState, useEffect} from "react";
 
 const MoviePage = () => {
     // show movie
-    const [moviesList, setMovieList] = useState([]);
+    const [movies, setmovies] = useState([]);
     useEffect(() => {
         const timer = setInterval(() => {
             fetch("http://localhost:8080/devops_starter_war_exploded/api/info/moviepage")
                 .then(res => res.json())
                 .then(data => {
-                    setMovieList(data);
-                    console.log(moviesList);
+                    setmovies(data);
+                    console.log(movies);
                 });
         }, 3000);
         return () => clearInterval(timer);
@@ -24,7 +24,7 @@ const MoviePage = () => {
                 .then(res => res.json())
                 .then(data => {
                     setComments(data);
-                    console.log(moviesList);
+                    console.log(movies);
                 });
         }, 3000);
         return () => clearInterval(timer);
@@ -33,7 +33,7 @@ const MoviePage = () => {
 
     return (
     <div className="container mt-5 mb-5">
-            {moviesList.map(movies => {
+            {movies.map(movies => {
                 return (
                     <div className="row d-flex justify-content-center">
                         <div className="col-md-10">
