@@ -19,6 +19,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
+
+import org.eclipse.persistence.internal.jpa.EntityManagerImpl;
 import utils.EMF_Creator;
 
 /**
@@ -28,7 +30,7 @@ import utils.EMF_Creator;
 public class DemoResource {
 
     List<Movies> movies = new ArrayList<>();
-    List<Movies> info = new ArrayList<Movies>();
+    List<Movies> info = new ArrayList<>();
     List<User> users = new ArrayList<>();
     List<MovieInfo> comment = new ArrayList<>();
     List<MovieInfo> ratings = new ArrayList<>();
@@ -113,7 +115,7 @@ public class DemoResource {
         ResultSet rs = getConnection().createStatement().executeQuery("INSERT INTO movie_info SET comment = ?");
         while (rs.next()) {
             Movies movie = new Movies();
-            movie.setId(rs.getInt("movie_id"));
+            movie.setId(rs.getLong("movie_id"));
             movie.setTitle(rs.getString("title"));
             movies.add(movie);
         }
@@ -136,15 +138,11 @@ public class DemoResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("DisplayMovieComments")
-    public List<MovieInfo> DisplayMovieComments() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT fk_user_name, comment FROM movie_info");
-        while (rs.next()) {
-            MovieInfo comment = new MovieInfo();
-            comment.setUsername(rs.getString("fk_user_name"));
-            comment.setComment(rs.getString("comment"));
-            comments.add(comment);
-        }
-        return comments;
+    public List<Movies> DisplayMovieComments() throws SQLException {
+        EntityManager em = EMF.createEntityManager();
+        TypedQuery <Movies> query = em.createQuery("SELECT m from MovieInfo m where m.username=m.username and m.comment=m.comment", entities.Movies.class);
+        List<Movies> result = query.getResultList();
+        return result;
     }
 
 
@@ -153,28 +151,20 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("movies")
     public List<Movies> ShowAllMovies() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT movie_id, title FROM movies");
-        while (rs.next()) {
-            Movies movie = new Movies();
-            movie.setId(rs.getInt("movie_id"));
-            movie.setTitle(rs.getString("title"));
-            movies.add(movie);
-        }
-        return movies;
+        EntityManager em = EMF.createEntityManager();
+        TypedQuery <Movies> query = em.createQuery("SELECT m from Movies m", entities.Movies.class);
+        List<Movies> result = query.getResultList();
+        return result;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("moviepage")
     public List<Movies> MoviePage() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("SELECT title, description FROM movies WHERE movie_id = movie_id");
-        if (rs.next()) {
-            Movies movieinfo = new Movies();
-            movieinfo.setTitle(rs.getString("title"));
-            movieinfo.setDescription(rs.getString("description"));
-            info.add(movieinfo);
-        }
-        return info;
+        EntityManager em = EMF.createEntityManager();
+        TypedQuery <Movies> query = em.createQuery("SELECT m from Movies m where m.id=m.id", entities.Movies.class);
+        List<Movies> result = query.getResultList();
+        return result;
     }
 
     @GET
