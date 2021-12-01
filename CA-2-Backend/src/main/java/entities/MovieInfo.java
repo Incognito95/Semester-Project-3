@@ -18,11 +18,11 @@ public class MovieInfo implements Serializable {
     private long id;
     @Column(name = "username", length = 25)
     private String username;
-    @Column(name = "comment", length = 25)
+    @Column(name = "comment", length = 100)
     private String comment;
     @Column(name = "rating", length = 25)
     private int rating;
-    @Column(name = "title", length = 25)
+    @Column(name = "title", length = 100)
     private String title;
 
     @ManyToOne
