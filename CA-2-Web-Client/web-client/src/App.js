@@ -18,13 +18,35 @@ import Home from "./Components/Home";
 import NoMatch from "./Components/NoMatch";
 import AllMovies from "./Components/AllMovies";
 import MoviePage from "./Components/MoviePage";
-
 import React, { useState,useEffect } from "react";
 import facade from "./ApiFacade";
+import SearchBar from "./Components/Searchbar";
+
+
+
 
 
 
 function App() {
+
+    const [moviesList, setMovieList] = useState([]);
+    useEffect(() => {
+        const timer = setInterval( () => {
+            fetch("http://localhost:8080/devops_starter_war_exploded/api/info/movies")
+                .then(res => res.json())
+                .then(data => {
+                    setMovieList(data);
+                });
+        }, 3000);
+        return () => clearInterval(timer);
+    });
+
+    return (
+        <div className="App">
+            <SearchBar placeholder="Enter a Book Name..." data={moviesList} />
+        </div>
+    );
+
     const [loggedIn, setLoggedIn] = useState(false)
 
     const logout = () => {
