@@ -14,16 +14,13 @@ public class MovieInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Column(name = "id", length = 10)
+    @Column(name = "movieInfo_id", length = 10)
     private long id;
-    @Column(name = "username", length = 25)
-    private String username;
     @Column(name = "comment", length = 100)
     private String comment;
     @Column(name = "rating", length = 25)
     private int rating;
-    @Column(name = "title", length = 100)
-    private String title;
+
 
     @ManyToOne
     private Movies movies;
@@ -34,12 +31,9 @@ public class MovieInfo implements Serializable {
     public MovieInfo() {
     }
 
-    public MovieInfo(long id, String username, String comment, int rating, String title, List<Movies> moviesList) {
-        this.id = id;
-        this.username = username;
+    public MovieInfo(String comment, int rating, Movies movies, User user) {
         this.comment = comment;
         this.rating = rating;
-        this.title = title;
         this.movies = movies;
         this.user = user;
     }
@@ -50,14 +44,6 @@ public class MovieInfo implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getComment() {
@@ -76,13 +62,6 @@ public class MovieInfo implements Serializable {
         this.rating = rating;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public Movies getMovies() {
         return movies;

@@ -15,16 +15,13 @@ public class MovieInfoDTO {
         this.id = mi.getId();
         this.comment = mi.getComment();
         this.rating = mi.getRating();
-        this.title = mi.getTitle();
-        this.username = mi.getUsername();
+
     }
 
-    public MovieInfoDTO(long id, String comment, int rating, String title, String username) {
+    public MovieInfoDTO(long id, String comment, int rating) {
         this.id = id;
         this.comment = comment;
         this.rating = rating;
-        this.title = title;
-        this.username = username;
     }
 
     public MovieInfoDTO () {}
@@ -52,20 +49,5 @@ public class MovieInfoDTO {
     public void setRating(int rating) {
         this.rating = rating;
     }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    
 }

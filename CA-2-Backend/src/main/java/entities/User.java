@@ -34,7 +34,7 @@ public class User implements Serializable {
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+  @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   private List<MovieInfo> movieInfoList;
 
   public List<String> getRolesAsStrings() {

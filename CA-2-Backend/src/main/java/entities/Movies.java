@@ -4,6 +4,7 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,24 +15,24 @@ public class Movies implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    @Column(name = "id", length = 25)
+    @Column(name = "movie_id", length = 25)
     private Long id;
     @Column(name = "title", length = 25)
     private String title;
     @Column(name = "description", length = 25)
     private String description;
 
-    @OneToMany(mappedBy = "movies", cascade = CascadeType.PERSIST)
-    private List<MovieInfo> movieInfoList;
+    @OneToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<MovieInfo> movieInfo;
 
     public Movies() {
     }
 
-    public Movies(Long id, String title, String description) {
+    public Movies(Long id, String title, String description, List<MovieInfo> movieInfo) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.movieInfoList = movieInfoList;
+        this.movieInfo = new ArrayList<>();
     }
 
     public Long getId() {
