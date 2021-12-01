@@ -19,7 +19,7 @@ public class Movies implements Serializable {
     private Long id;
     @Column(name = "title", length = 25)
     private String title;
-    @Column(name = "description", length = 25)
+    @Column(name = "description", length = 2500)
     private String description;
 
     @OneToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -28,11 +28,10 @@ public class Movies implements Serializable {
     public Movies() {
     }
 
-    public Movies(Long id, String title, String description, List<MovieInfo> movieInfo) {
+    public Movies(Long id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.movieInfo = new ArrayList<>();
     }
 
     public Long getId() {
