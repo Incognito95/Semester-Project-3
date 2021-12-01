@@ -131,7 +131,7 @@ public class DemoResource {
     @Path("DisplayMovieComments")
     public List<Movies> DisplayMovieComments() throws SQLException {
         EntityManager em = EMF.createEntityManager();
-        TypedQuery <Movies> query = em.createQuery("SELECT m from MovieInfo m where m.username=m.username and m.comment=m.comment", entities.Movies.class);
+        TypedQuery <Movies> query = em.createQuery("SELECT m FROM MovieInfo m WHERE m.username = m.username and m.comment = m.comment", entities.Movies.class);
         List<Movies> result = query.getResultList();
         return result;
     }
@@ -153,7 +153,7 @@ public class DemoResource {
     @Path("moviepage")
     public List<Movies> MoviePage() throws SQLException {
         EntityManager em = EMF.createEntityManager();
-        TypedQuery <Movies> query = em.createQuery("SELECT m from Movies m where m.id=m.id", entities.Movies.class);
+        TypedQuery <Movies> query = em.createQuery("SELECT m FROM Movies m WHERE m.id = m.id", entities.Movies.class);
         List<Movies> result = query.getResultList();
         return result;
     }

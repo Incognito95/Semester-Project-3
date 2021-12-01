@@ -61,14 +61,8 @@ const MoviePage = () => {
                                                 </div>
                                                 <i className="fa fa-shopping-cart text-muted"></i>
                                             </div>
-                                            <div className="mt-4 mb-3"><span
-                                                className="text-uppercase text-muted brand">Orianz</span>
+                                            <div className="mt-4 mb-3">
                                                 <h5 className="text-uppercase">{movies.title}</h5>
-                                                <div className="price d-flex flex-row align-items-center"><span
-                                                    className="act-price">$20</span>
-                                                    <div className="ml-2"><small className="dis-price">$59</small>
-                                                        <span>40% OFF</span></div>
-                                                </div>
                                             </div>
                                             <p className="about">{movies.description}</p>
                                         </div>

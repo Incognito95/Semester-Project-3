@@ -7,7 +7,7 @@ public class MovieInfoDTO {
 
     private long id;
     private String comment;
-    private String rating;
+    private int rating;
     private String title;
     private String username;
 
@@ -19,7 +19,7 @@ public class MovieInfoDTO {
         this.username = mi.getUsername();
     }
 
-    public MovieInfoDTO(long id, String comment, String rating, String title, String username) {
+    public MovieInfoDTO(long id, String comment, int rating, String title, String username) {
         this.id = id;
         this.comment = comment;
         this.rating = rating;
@@ -45,11 +45,11 @@ public class MovieInfoDTO {
         this.comment = comment;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
