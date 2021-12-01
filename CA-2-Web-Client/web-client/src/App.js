@@ -18,9 +18,11 @@ import Home from "./Components/Home";
 import NoMatch from "./Components/NoMatch";
 import AllMovies from "./Components/AllMovies";
 import MoviePage from "./Components/MoviePage";
+import Searchbar from "./Components/Searchbar";
 
 import React, { useState,useEffect } from "react";
 import facade from "./ApiFacade";
+import {render} from "react-dom";
 
 
 
@@ -46,35 +48,38 @@ function App() {
         return "admin has logged in"
     }
 
-    return (
-        <div>
-            {!loggedIn ? (<Login login={login} />) :
-                (<div>
-                    <Menu />
-                    <Switch>
-                         <Route exact path="/">
-                         <Home />
-                         </Route>
-                            <Route exact path="/allmovies">
-                                <AllMovies />
+    render()
+    {
+        return (
+            <div>
+                {!loggedIn ? (<Login login={login}/>) :
+                    (<div>
+                        <Menu/>
+                        <Switch>
+                            <Route exact path="/">
+                                <Home/>
                             </Route>
-                        <Route path="/login">
+                            <Route exact path="/allmovies">
+                                <AllMovies/>
+                            </Route>
+                            <Route path="/login">
                                 <Login/>
-                        </Route>
-                        <Route exact path="/moviepage">
-                             <MoviePage />
-                        </Route>
-                        <Route exact path="/moviepage/:id">
-                            <MoviePage />
-                        </Route>
-                        <NoMatch />
-                    </Switch>
-                    <LoggedIn />
-                </div>)}
+                            </Route>
+                            <Route exact path="/moviepage">
+                                <MoviePage/>
+                            </Route>
+                            <Route exact path="/moviepage/:id">
+                                <MoviePage/>
+                            </Route>
+                            <NoMatch/>
+                        </Switch>
+                        <LoggedIn/>
+                    </div>)}
+                <Searchbar placeholder={"Enter search "} handleChange={(e) => console.log(e.target.value())}/>
 
-        </div>
-    )
-
+            </div>
+        )
+    }
 }
 
 
