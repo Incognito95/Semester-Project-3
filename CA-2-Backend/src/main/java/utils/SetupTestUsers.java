@@ -1,6 +1,7 @@
 package utils;
 
 
+import entities.Comment;
 import entities.Movies;
 import entities.Role;
 import entities.User;
@@ -31,6 +32,7 @@ public class SetupTestUsers {
     Movies movie3 = new Movies(3L, "Ganglands", "To protect his family from a powerful drug lord, skilled thief Mehdi and his expert team of robbers are pulled into a violent and deadly turf war." );
     Movies movie4 = new Movies( 4L, "Jailbirds New Orleans", "Feuds, flirtations and toilet talk go down among the incarcerated women at the Orleans Justice Center in New Orleans on this gritty reality series.");
 
+    Comment comment1 = new Comment(1L, "user", "Det er en virkelig god film!");
 
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");
@@ -52,6 +54,7 @@ public class SetupTestUsers {
     em.persist(movie2);
     em.persist(movie3);
     em.persist(movie4);
+    em.persist(comment1);
     em.getTransaction().commit();
     System.out.println("PW: " + user.getUserPass());
     System.out.println("Testing user with OK password: " + user.verifyPassword("test"));
