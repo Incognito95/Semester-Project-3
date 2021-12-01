@@ -14,7 +14,7 @@ public class MovieInfoDTO {
     public MovieInfoDTO (MovieInfo mi) {
         this.id = mi.getId();
         this.comment = mi.getComment();
-        this.rating = mi.getRating();
+        //this.rating = mi.getRating();
         this.title = mi.getTitle();
         this.username = mi.getUsername();
     }

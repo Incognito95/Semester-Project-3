@@ -26,32 +26,49 @@ import {render} from "react-dom";
 
 
 
-function App() {
-    const [loggedIn, setLoggedIn] = useState(false)
+class App extends React.Component {
 
-    const logout = () => {
-        // confused on how we get this to work as it's not being called
-        facade.logout()
-        setLoggedIn(false)
+    constructor() {
+        super();
+        this.state = {
+            movies: [],
+            stats: [],
+            searchField: ''
+        }
     }
 
-    if (logout == true) {
-        return "admin has logged out"
-    }
 
-    const login = (user, pass) => {
-        facade.login(user,pass)
-            .then(res =>setLoggedIn(true));
-    }
 
-    if (login === true) {
-        return "admin has logged in"
-    }
+    render() {
 
-    render()
-    {
+        const [loggedIn, setLoggedIn] = useState(false)
+        const logout = () => {
+            // confused on how we get this to work as it's not being called
+            facade.logout()
+            setLoggedIn(false)
+        }
+
+        if (logout == true) {
+            return "admin has logged out"
+        }
+
+        const login = (user, pass) => {
+            facade.login(user, pass)
+                .then(res => setLoggedIn(true));
+        }
+
+        if (login === true) {
+            return "admin has logged in"
+        }
+        const {stats, searchField} = this.state
+        const filteredMovies = stats.filter(Movies => (
+            movies.Movies.toLowerCase().includes(searchField.toLowerCase())
+        ))
         return (
             <div>
+                <Searchbar placeholder={"Enter search "}
+                           handleChange={(e) => this.setState({searchField: e.target.value})}/>
+                <MovieList stats={filteredMovies}/>
                 {!loggedIn ? (<Login login={login}/>) :
                     (<div>
                         <Menu/>
@@ -75,28 +92,29 @@ function App() {
                         </Switch>
                         <LoggedIn/>
                     </div>)}
-                <Searchbar placeholder={"Enter search "} handleChange={(e) => console.log(e.target.value())}/>
-
             </div>
         )
     }
 }
 
 
-function LoggedIn() {
-    const [dataFromServer, setDataFromServer] = useState("Loading...")
+    function
 
-    useEffect(() => {
-        facade.fetchData().then(data=> setDataFromServer(data.msg));
-    }, [])
+    LoggedIn() {
+        const [dataFromServer, setDataFromServer] = useState("Loading...")
 
-    return (
-        <div>
+        useEffect(() => {
+            facade.fetchData().then(data => setDataFromServer(data.msg));
+        }, [])
 
-        </div>
-    )
+        return (
+            <div>
 
-}
+            </div>
+        )
+
+    }
+
 
 
 
