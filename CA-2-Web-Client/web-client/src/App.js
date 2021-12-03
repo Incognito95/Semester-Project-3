@@ -55,16 +55,16 @@ function App() {
                          <Route exact path="/">
                          <Home />
                          </Route>
-                         <Route exact path="/allmovies">
-                            <AllMovies />
-                         </Route>
+                            <Route exact path="/allmovies">
+                                <AllMovies />
+                            </Route>
                         <Route path="/login">
                                 <Login/>
                         </Route>
                         <Route exact path="/moviepage">
                              <MoviePage />
                         </Route>
-                        <Route path="/moviepage/:id">
+                        <Route exact path="/moviepage/:id">
                             <MoviePage />
                         </Route>
                         <NoMatch />

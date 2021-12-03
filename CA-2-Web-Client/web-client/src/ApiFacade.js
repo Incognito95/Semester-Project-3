@@ -31,14 +31,9 @@ function ApiFacade() {
             .then(res => {setToken(res.token) })
     }
 
-    const fetchData = (endpoint) => {
+    const fetchData = () => {
         const options = makeOptions("GET",true); //True add's the token
-        return fetch(URL + "/api/info/" + endpoint, options).then(handleHttpErrors);
-    }
-
-    const postData = (body, endpoint) => {
-        const options = makeOptions("POST",true, body); //True add's the token
-        return fetch(URL + "/api/info/" + endpoint, options).then(handleHttpErrors);
+        return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
     }
 
     const makeOptions= (method,addToken,body) =>{
@@ -64,8 +59,7 @@ function ApiFacade() {
         loggedIn,
         login,
         logout,
-        fetchData,
-        postData
+        fetchData
     }
 }
 

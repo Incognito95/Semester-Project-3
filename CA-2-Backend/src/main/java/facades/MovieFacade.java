@@ -1,7 +1,6 @@
 package facades;
 
 import dtos.MovieCommentDTO;
-import dtos.MovieDTO;
 import entities.MovieInfo;
 import entities.Movies;
 import entities.User;
@@ -48,27 +47,6 @@ public class MovieFacade {
        }
 
         return true;
-    }
-
-    public MovieDTO getMoviesById(long id) {
-        EntityManager em = emf.createEntityManager();
-        Movies movies = em.find(Movies.class, id);
-        return new MovieDTO(movies);
-    }
-
-
-    public String searchMovie(MovieDTO mDTO) {
-        EntityManager em = emf.createEntityManager();
-        Movies movie = em.find(Movies.class, mDTO.getTitle());
-        return "you have searched for: " + movie;
-
-    }
-
-
-    public MovieDTO getMovieByTitle(MovieDTO title) {
-        EntityManager em = emf.createEntityManager();
-        Movies movies = em.find(Movies.class, title);
-        return new MovieDTO(movies);
     }
 
 }

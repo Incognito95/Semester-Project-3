@@ -2,7 +2,6 @@ package rest;
 
 import com.google.gson.Gson;
 import dtos.MovieCommentDTO;
-import dtos.MovieDTO;
 import entities.MovieInfo;
 import entities.Movies;
 import entities.User;
@@ -19,7 +18,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.PathParam;
 
 import facades.MovieFacade;
 import utils.EMF_Creator;
@@ -158,22 +156,22 @@ public class DemoResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("moviepage/{id}")
-    public String MoviePage(@PathParam("id") long id) throws SQLException {
-        MovieDTO movieDTO = MOVIE_FACADE.getMoviesById(id);
-        return gson.toJson(movieDTO, MovieDTO.class);
+    @Path("moviepage")
+    public List<Movies> MoviePage() throws SQLException {
+        EntityManager em = EMF.createEntityManager();
+        TypedQuery <Movies> query = em.createQuery("SELECT m FROM Movies m WHERE m.id = m.id", entities.Movies.class);
+        List<Movies> result = query.getResultList();
+        return result;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     @Path("search")
-    public void SearchForMovie(String jsonString) throws SQLException {
-        System.out.println(jsonString);
-        MovieDTO mDTO = gson.fromJson(jsonString, MovieDTO.class);
-        System.out.println(mDTO.getTitle());
-        MOVIE_FACADE.getMovieByTitle(mDTO);
+    public void SearchForMovie() throws SQLException {
+        EntityManager em = EMF.createEntityManager();
+        TypedQuery <Movies> query = em.createQuery("Select m.title from Movies m where m.id = :id", entities.Movies.class); //Mangler
+        query.setFirstResult(1);
+
     }
 
 
@@ -193,13 +191,13 @@ public class DemoResource {
     public void main(String[] args) throws Exception {
 //        ShowUserByLoggedIn(); // show user based on login
         ShowAllMovies(); // show all movies
-        MoviePage(1); // show one movie
+        MoviePage(); // show one movie
         GetInfoFromUser(); // show user
         AddMovieComment("hej"); // add comment to movie
         DisplayMovieComments(); // display comments for a movie
         AddMovieRating(); // display ratings for a movie
         DisplayMovieRatings(); // display ratings for a movie
-        SearchForMovie("hej");
+        SearchForMovie();
 
     }
 
