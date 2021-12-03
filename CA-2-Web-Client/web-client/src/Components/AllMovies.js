@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import facade from "../ApiFacade";
 
 const AllMovies = () => {
     const [moviesList, setMovieList] = useState([]);
     useEffect(() => {
-        const timer = setInterval( () => {
-            fetch("http://localhost:8080/devops_starter_war_exploded/api/info/movies")
-                .then(res => res.json())
-                .then(data => {
-                    setMovieList(data);
-                });
-        }, 3000);
-        return () => clearInterval(timer);
-    });
+        facade.fetchData("movies")
+            .then(data => {
+                setMovieList(data);
+            })
+    }, []);
 
 
     return (
