@@ -60,7 +60,11 @@ public class User implements Serializable {
     this.userName = userName;
     this.userSalt = BCrypt.gensalt(10);
     this.userPass = encrypt(userPass);
-    this.movieInfoList = movieInfoList;
+    this.movieInfoList = new ArrayList<>();
+  }
+
+  public void AddMovieInfo(MovieInfo movieInfo) {
+    movieInfoList.add(movieInfo);
   }
 
   public String getUserName() {

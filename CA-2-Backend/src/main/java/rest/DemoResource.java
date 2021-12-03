@@ -1,5 +1,7 @@
 package rest;
 
+import com.google.gson.Gson;
+import dtos.MovieCommentDTO;
 import entities.MovieInfo;
 import entities.Movies;
 import entities.User;
@@ -11,15 +13,13 @@ import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.POST;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Produces;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
+import facades.MovieFacade;
 import utils.EMF_Creator;
 
 /**
@@ -35,7 +35,11 @@ public class DemoResource {
     List<MovieInfo> ratings = new ArrayList<>();
     List<MovieInfo> comments = new ArrayList<>();
 
+    Gson gson = new Gson();
+
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+    public static final MovieFacade MOVIE_FACADE = MovieFacade.getMovieFacade(EMF);
+
     @Context
     private UriInfo context;
 
@@ -94,13 +98,15 @@ public class DemoResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("AddMovieComment")
-    public void AddMovieComment() throws SQLException {
-        int a = 1;
-        EntityManager em = EMF.createEntityManager();
-        TypedQuery <MovieInfo> query = em.createQuery("SELECT m from MovieInfo m where m.comment=:comment", entities.MovieInfo.class); //Mangler
-        query.setParameter(a ,DisplayMovieComments());
+    public void AddMovieComment(String jsonString) throws SQLException {
+        System.out.println(jsonString);
+        MovieCommentDTO mDTO = gson.fromJson(jsonString, MovieCommentDTO.class);
+        System.out.println(mDTO.getUsername() + mDTO.getComment() + mDTO.getMovieId());
+        MOVIE_FACADE.CreateComment(mDTO);
     }
+
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -187,7 +193,7 @@ public class DemoResource {
         ShowAllMovies(); // show all movies
         MoviePage(); // show one movie
         GetInfoFromUser(); // show user
-        AddMovieComment(); // add comment to movie
+        AddMovieComment("hej"); // add comment to movie
         DisplayMovieComments(); // display comments for a movie
         AddMovieRating(); // display ratings for a movie
         DisplayMovieRatings(); // display ratings for a movie
