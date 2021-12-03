@@ -81,16 +81,12 @@ const MoviePage = () => {
 
                         <div className="show-comments">
                             <h3>Comments</h3>
-                            {comments.map(comment => {
-                                return (
                             <div className="p-5 mb-4 bg-light mt-3">
                                     <div className="container-fluid py-5">
-                                        <p>{comment.username}</p>
-                                        <p>{comment.comment}</p>
+                                        <p>{comments.username}</p>
+                                        <p>{comments.comment}</p>
                                     </div>
                             </div>
-                                )
-                            })}
                         </div>
 
                     </div>
