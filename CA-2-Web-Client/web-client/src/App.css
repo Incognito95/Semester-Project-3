@@ -20,13 +20,31 @@
     }
 }
 
-.card {
-    height: 500px;
-}
+
 
 .card:hover {
     background-color: #F8F9FA;
     cursor: pointer;
+}
+
+
+/* ------- rating ------- */
+.rating-css div {
+    color: #ffe400;
+    font-size: 30px;
+}
+
+.rating-css input {
+    display: none;
+}
+
+
+.rating-css input:checked + label ~ label {
+    color: #838383;
+}
+.rating-css label:active {
+    transform: scale(0.8);
+    transition: 0.3s ease;
 }
 
 
