@@ -37,7 +37,7 @@ public class MovieFacade {
             Movies movies = em.find(Movies.class, mDTO.getMovieId());
 
         if (movies != null) {
-                MovieInfo movieInfo = new MovieInfo(mDTO.getComment(), 5, movies, user);
+                MovieInfo movieInfo = new MovieInfo(mDTO.getComment(), mDTO.getRating(), movies, user);
                 user.AddMovieInfo(movieInfo);
         }
 
