@@ -22,16 +22,24 @@ public class Movies implements Serializable {
     @Column(name = "description", length = 2500)
     private String description;
 
+    @Column(name = "images", length = 100)
+    private String images;
+
     @OneToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<MovieInfo> movieInfo;
 
     public Movies() {
     }
 
-    public Movies(Long id, String title, String description) {
+    public Movies(Long id, String title, String description, String images) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.images = images;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Long getId() {
@@ -56,5 +64,13 @@ public class Movies implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 }

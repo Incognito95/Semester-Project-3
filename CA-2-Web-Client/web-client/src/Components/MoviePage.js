@@ -3,6 +3,7 @@ import facade from "../ApiFacade";
 import { useParams } from "react-router-dom";
 
 
+
 const MoviePage = () => {
 
     const [movies, setmovies] = useState([]);
@@ -45,7 +46,7 @@ const MoviePage = () => {
                                     <div className="col-md-6">
                                         <div className="images p-3">
                                             <div className="text-center p-4">
-                                                <img id="main-image" src="https://dummyimage.com/300x500/f8f9fa/000000" width="" value=""/></div>
+                                                <img src={`/images/${movies.images}`} width="" value=""/></div>
                                             <div className="thumbnail text-center">
                                                 <img src="" width="70"/>
                                             </div>
@@ -58,12 +59,29 @@ const MoviePage = () => {
                                                     className="fa fa-long-arrow-left"></i> <span
                                                     className="ml-1"></span>
                                                 </div>
-                                                <i className="fa fa-shopping-cart text-muted"></i>
                                             </div>
                                             <div className="mt-4 mb-3">
                                                 <h5 className="text-uppercase">{movies.title}</h5>
                                             </div>
                                             <p className="about">{movies.description}</p>
+
+                                            <div className="rating-css">
+                                                <div className="star-icon">
+                                                    <input type="radio" name="rating1" id="rating1" />
+                                                        <label htmlFor="rating1" className="fa fa-star"></label>
+                                                        <input type="radio" name="rating1" id="rating2" />
+                                                            <label htmlFor="rating2" className="fa fa-star"></label>
+                                                            <input type="radio" name="rating1" id="rating3" />
+                                                                <label htmlFor="rating3" className="fa fa-star"></label>
+                                                                <input type="radio" name="rating1" id="rating4" />
+                                                                    <label htmlFor="rating4"
+                                                                           className="fa fa-star"></label>
+                                                                    <input type="radio" name="rating1" id="rating5" />
+                                                                        <label htmlFor="rating5"
+                                                                               className="fa fa-star"></label>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
