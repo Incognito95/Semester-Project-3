@@ -12,6 +12,7 @@ import {
     NavLink
 } from "react-router-dom";
 
+import Signup from "./Components/Signup";
 import Login from "./Components/Login";
 import Menu from "./Components/Menu";
 import Home from "./Components/Home";
@@ -71,7 +72,9 @@ function App() {
                     </Switch>
                     <LoggedIn />
                 </div>)}
-
+            {/*<Route path="/signup">*/}
+            {/*    <Signup />*/}
+            {/*</Route>*/}
         </div>
     )
 
