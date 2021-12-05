@@ -7,6 +7,7 @@ const MoviePage = () => {
 
     const [movies, setmovies] = useState([]);
     const [comments, setComments] = useState([]);
+
     let { id } = useParams();
     console.log("id:", id);
 

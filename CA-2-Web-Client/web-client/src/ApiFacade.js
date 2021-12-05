@@ -41,7 +41,7 @@ function ApiFacade() {
         return fetch(URL + "/api/info/" + endpoint, options).then(handleHttpErrors);
     }
 
-    const makeOptions= (method,addToken,body) =>{
+    const makeOptions = (method,addToken,body) => {
         var opts = {
             method: method,
             headers: {

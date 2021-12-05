@@ -105,7 +105,7 @@ public class DemoResource {
     public void AddMovieComment(String jsonString) throws SQLException {
         System.out.println(jsonString);
         MovieCommentDTO mDTO = gson.fromJson(jsonString, MovieCommentDTO.class);
-        System.out.println(mDTO.getUsername() + mDTO.getComment() + mDTO.getMovieId());
+        System.out.println("Username: " + mDTO.getUsername() + " Comment: " + mDTO.getComment() + " Movie ID: " + mDTO.getMovieId() + " rating: " + mDTO.getRating());
         MOVIE_FACADE.CreateComment(mDTO);
     }
 
