@@ -31,11 +31,6 @@ import utils.EMF_Creator;
 public class DemoResource {
 
     List<Movie> movies = new ArrayList<>();
-    List<Movie> info = new ArrayList<>();
-    List<User> users = new ArrayList<>();
-    List<MovieInfo> comment = new ArrayList<>();
-    List<MovieInfo> ratings = new ArrayList<>();
-    List<MovieInfo> comments = new ArrayList<>();
 
     Gson gson = new Gson();
 
