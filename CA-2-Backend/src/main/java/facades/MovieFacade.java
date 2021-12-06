@@ -17,6 +17,7 @@ public class MovieFacade {
     }
 
     /**
+     *
      * @param _emf
      * @return the instance of this facade.
      */
@@ -36,9 +37,9 @@ public class MovieFacade {
             Movie movie = em.find(Movie.class, mDTO.getMovieId());
 
             if (movie != null) {
-                MovieInfo movieInfo = new MovieInfo(mDTO.getComment(), mDTO.getRating(), movie, user);
-                user.AddMovieInfo(movieInfo);
-                movie.addMovieInfo(movieInfo);
+                    MovieInfo movieInfo = new MovieInfo(mDTO.getComment(), mDTO.getRating(), movie, user);
+                    user.AddMovieInfo(movieInfo);
+                    movie.addMovieInfo(movieInfo);
             }
 
             em.getTransaction().begin();
