@@ -27,7 +27,6 @@ function Menu () {
                     <li className="nav-item">
                         <NavLink exact active className="active nav-link btn btn-primary text-white" to="/allmovies">All Movies</NavLink>
                     </li>
-                        <input className="search-bar" type="search" placeholder="Search" aria-label="Search" />
                 </ul>
                 <form className="d-flex">
                     <NavLink exact active className="active nav-link text-black" to="#">
