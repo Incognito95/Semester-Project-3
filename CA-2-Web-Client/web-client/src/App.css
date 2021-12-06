@@ -20,6 +20,10 @@
     }
 }
 
+.card {
+    height: 500px;
+}
+
 
 
 .card:hover {
