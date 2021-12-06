@@ -17,6 +17,7 @@ const AllMovies = () => {
             <div className="">
                 <input className="search-bar mt-3 form-control w-50 search" type="search" placeholder="Search for a movie" aria-label="Search" onChange={event => setQuery(event.target.value)} />
                 {
+
                     moviesList.filter(movie => {
                         if (query === '') {
                             return movie;
@@ -29,7 +30,9 @@ const AllMovies = () => {
                                 <div className="mt-4 card-group">
                                     <div className="search" key={index}>
                                         <h5 className="card-title">{movie.title}</h5>
-                                        <img src={`/images/${movie.images}`} className="card-img-top" alt="..." />
+                                        <Link to={`/moviepage/${movie.id}`}>
+                                            <img src={`/images/${movie.images}`} className="card-img-top" alt="..." />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
