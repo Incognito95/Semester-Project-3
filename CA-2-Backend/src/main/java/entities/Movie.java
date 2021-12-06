@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "movies")
-public class Movies implements Serializable {
+@Table(name = "movie")
+public class Movie implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -25,13 +25,13 @@ public class Movies implements Serializable {
     @Column(name = "images", length = 100)
     private String images;
 
-    @OneToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<MovieInfo> movieInfo;
 
-    public Movies() {
+    public Movie() {
     }
 
-    public Movies(Long id, String title, String description, String images) {
+    public Movie(Long id, String title, String description, String images) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -73,4 +73,13 @@ public class Movies implements Serializable {
     public void setImages(String images) {
         this.images = images;
     }
+
+    public List<MovieInfo> getMovieInfo() {
+        return movieInfo;
+    }
+
+    public void addMovieInfo(MovieInfo movieInfo) {
+        this.movieInfo.add(movieInfo);
+    }
+
 }

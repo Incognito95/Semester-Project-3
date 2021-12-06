@@ -2,8 +2,8 @@ package facades;
 
 import dtos.MovieCommentDTO;
 import dtos.MovieDTO;
+import entities.Movie;
 import entities.MovieInfo;
-import entities.Movies;
 import entities.User;
 
 import javax.persistence.EntityManager;
@@ -34,32 +34,34 @@ public class MovieFacade {
         User user = em.find(User.class, mDTO.getUsername());
 
         if (user != null) {
-            Movies movies = em.find(Movies.class, mDTO.getMovieId());
+            Movie movie = em.find(Movie.class, mDTO.getMovieId());
 
-        if (movies != null) {
-                MovieInfo movieInfo = new MovieInfo(mDTO.getComment(), mDTO.getRating(), movies, user);
-                user.AddMovieInfo(movieInfo);
+            if (movie != null) {
+                    MovieInfo movieInfo = new MovieInfo(mDTO.getComment(), mDTO.getRating(), movie, user);
+                    user.AddMovieInfo(movieInfo);
+                    movie.addMovieInfo(movieInfo);
+            }
+
+            em.getTransaction().begin();
+            em.merge(user);
+            em.merge(movie);
+            em.getTransaction().commit();
+
         }
-
-        em.getTransaction().begin();
-        em.merge(user);
-        em.getTransaction().commit();
-
-       }
 
         return true;
     }
 
     public MovieDTO getMoviesById(long id) {
         EntityManager em = emf.createEntityManager();
-        Movies movies = em.find(Movies.class, id);
-        return new MovieDTO(movies);
+        Movie movie = em.find(Movie.class, id);
+        return new MovieDTO(movie);
     }
 
 
     public String searchMovie(MovieDTO mDTO) {
         EntityManager em = emf.createEntityManager();
-        Movies movie = em.find(Movies.class, mDTO.getTitle());
+        Movie movie = em.find(Movie.class, mDTO.getTitle());
         return "you have searched for: " + movie;
 
     }
@@ -67,8 +69,13 @@ public class MovieFacade {
 
     public MovieDTO getMovieByTitle(MovieDTO title) {
         EntityManager em = emf.createEntityManager();
-        Movies movies = em.find(Movies.class, title);
-        return new MovieDTO(movies);
+        Movie movie = em.find(Movie.class, title);
+        return new MovieDTO(movie);
     }
+
+//    public static void main(String[] args) {
+//        MovieFacade movieFacade = getMovieFacade(EMF_Creator.createEntityManagerFactory());
+//        movieFacade.getMovieByTitle(new MovieDTO(1, "To protect his family from a powerful drug lord, skilled thief Mehdi and his expert team of robbers are pulled into a violent and deadly turf war.", "Ganglands", "ganglands.jpg"));
+//    }
 
 }

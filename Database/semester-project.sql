@@ -31,7 +31,7 @@ CREATE TABLE `movieinfo` (
   PRIMARY KEY (`movieInfo_id`),
   KEY `FK_movieinfo_USER_user_name` (`USER_user_name`),
   KEY `FK_movieinfo_MOVIES_movie_id` (`MOVIES_movie_id`),
-  CONSTRAINT `FK_movieinfo_MOVIES_movie_id` FOREIGN KEY (`MOVIES_movie_id`) REFERENCES `movies` (`movie_id`),
+  CONSTRAINT `FK_movieinfo_MOVIES_movie_id` FOREIGN KEY (`MOVIES_movie_id`) REFERENCES `movie` (`movie_id`),
   CONSTRAINT `FK_movieinfo_USER_user_name` FOREIGN KEY (`USER_user_name`) REFERENCES `users` (`user_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -47,13 +47,13 @@ INSERT INTO `movieinfo` VALUES (1,'god film',5,1,'admin'),(2,'hello',NULL,NULL,N
 UNLOCK TABLES;
 
 --
--- Table structure for table `movies`
+-- Table structure for table `movie`
 --
 
-DROP TABLE IF EXISTS `movies`;
+DROP TABLE IF EXISTS `movie`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `movies` (
+CREATE TABLE `movie` (
   `movie_id` bigint NOT NULL AUTO_INCREMENT,
   `description` varchar(2500) DEFAULT NULL,
   `title` varchar(25) DEFAULT NULL,
@@ -63,13 +63,13 @@ CREATE TABLE `movies` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `movies`
+-- Dumping data for table `movie`
 --
 
-LOCK TABLES `movies` WRITE;
-/*!40000 ALTER TABLE `movies` DISABLE KEYS */;
-INSERT INTO `movies` VALUES (1,'To protect his family from a powerful drug lord, skilled thief Mehdi and his expert team of robbers are pulled into a violent and deadly turf war.','Ganglands','ganglands.jpg'),(2,'As her father nears the end of his life, filmmaker Kirsten Johnson stages his death in inventive and comical ways to help them both face the inevitable.','Dick Johnson Is Dead','dick_johnson.jpeg'),(3,'Feuds, flirtations and toilet talk go down among the incarcerated women at the Orleans Justice Center in New Orleans on this gritty reality series.','Jailbirds New Orleans','new_orleans.jpg'),(4,'After crossing paths at a party, a Cape Town teen sets out to prove whether a private-school swimming star is her sister who was abducted at birth.','Blood & Water','blood_water.jpg');
-/*!40000 ALTER TABLE `movies` ENABLE KEYS */;
+LOCK TABLES `movie` WRITE;
+/*!40000 ALTER TABLE `movie` DISABLE KEYS */;
+INSERT INTO `movie` VALUES (1,'To protect his family from a powerful drug lord, skilled thief Mehdi and his expert team of robbers are pulled into a violent and deadly turf war.','Ganglands','ganglands.jpg'),(2,'As her father nears the end of his life, filmmaker Kirsten Johnson stages his death in inventive and comical ways to help them both face the inevitable.','Dick Johnson Is Dead','dick_johnson.jpeg'),(3,'Feuds, flirtations and toilet talk go down among the incarcerated women at the Orleans Justice Center in New Orleans on this gritty reality series.','Jailbirds New Orleans','new_orleans.jpg'),(4,'After crossing paths at a party, a Cape Town teen sets out to prove whether a private-school swimming star is her sister who was abducted at birth.','Blood & Water','blood_water.jpg');
+/*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

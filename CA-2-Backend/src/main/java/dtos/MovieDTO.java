@@ -1,6 +1,6 @@
 package dtos;
 
-import entities.Movies;
+import entities.Movie;
 
 public class MovieDTO {
 
@@ -9,7 +9,7 @@ public class MovieDTO {
     private String title;
     private String images;
 
-    public MovieDTO (Movies M) {
+    public MovieDTO (Movie M) {
         this.id =  M.getId();
         this.description = M.getDescription();
         this.title = M.getTitle();

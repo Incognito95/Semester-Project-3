@@ -3,8 +3,8 @@ package rest;
 import com.google.gson.Gson;
 import dtos.MovieCommentDTO;
 import dtos.MovieDTO;
+import entities.Movie;
 import entities.MovieInfo;
-import entities.Movies;
 import entities.User;
 
 import java.sql.*;
@@ -30,8 +30,8 @@ import utils.EMF_Creator;
 @Path("info")
 public class DemoResource {
 
-    List<Movies> movies = new ArrayList<>();
-    List<Movies> info = new ArrayList<>();
+    List<Movie> movies = new ArrayList<>();
+    List<Movie> info = new ArrayList<>();
     List<User> users = new ArrayList<>();
     List<MovieInfo> comment = new ArrayList<>();
     List<MovieInfo> ratings = new ArrayList<>();
@@ -113,10 +113,10 @@ public class DemoResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("rating")
-    public List<Movies> AddMovieRating() throws SQLException {
+    public List<Movie> AddMovieRating() throws SQLException {
         ResultSet rs = getConnection().createStatement().executeQuery("INSERT INTO movie_info SET comment = ?"); //Mangler
         while (rs.next()) {
-            Movies movie = new Movies();
+            Movie movie = new Movie();
             movie.setId(rs.getLong("movie_id"));
             movie.setTitle(rs.getString("title"));
             movies.add(movie);
@@ -137,10 +137,10 @@ public class DemoResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("DisplayMovieComments")
-    public List<Movies> DisplayMovieComments() throws SQLException {
+    public List<Movie> DisplayMovieComments() throws SQLException {
         EntityManager em = EMF.createEntityManager();
-        TypedQuery <Movies> query = em.createQuery("SELECT m FROM MovieInfo m WHERE m.comment = m.comment", entities.Movies.class);
-        List<Movies> result = query.getResultList();
+        TypedQuery <Movie> query = em.createQuery("SELECT m FROM MovieInfo m WHERE m.comment = m.comment", Movie.class);
+        List<Movie> result = query.getResultList();
         return result;
     }
 
@@ -149,10 +149,10 @@ public class DemoResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("movies")
-    public List<Movies> ShowAllMovies() throws SQLException {
+    public List<Movie> ShowAllMovies() throws SQLException {
         EntityManager em = EMF.createEntityManager();
-        TypedQuery <Movies> query = em.createQuery("SELECT m from Movies m", entities.Movies.class);
-        List<Movies> result = query.getResultList();
+        TypedQuery <Movie> query = em.createQuery("SELECT m from Movie m", Movie.class);
+        List<Movie> result = query.getResultList();
         return result;
     }
 

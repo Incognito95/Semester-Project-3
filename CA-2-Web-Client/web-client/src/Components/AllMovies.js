@@ -5,7 +5,7 @@ import facade from "../ApiFacade";
 const AllMovies = () => {
     const [moviesList, setMovieList] = useState([]);
     useEffect(() => {
-        facade.fetchData("movies")
+        facade.fetchData("movie")
             .then(data => {
                 setMovieList(data);
             })
@@ -14,17 +14,17 @@ const AllMovies = () => {
 
     return (
             <div className="">
-                 {moviesList.map(movies => {
+                 {moviesList.map(movie => {
                      return (
-                         <div className="container movies">
+                         <div className="container movie">
                              <div className="row">
                                      <div className="mt-4 card-group">
                                         <div className="card border-0">
-                                            <h5 className="card-title">{movies.title}</h5>
-                                            <Link to={`/moviepage/${movies.id}`}>
-                                             <img src={`/images/${movies.images}`} className="card-img-top" alt="..." />
+                                            <h5 className="card-title">{movie.title}</h5>
+                                            <Link to={`/moviepage/${movie.id}`}>
+                                             <img src={`/images/${movie.images}`} className="card-img-top" alt="..." />
                                                 <div className="card-body">
-                                                        {/*<p className="card-text">{movies.description}</p>*/}
+                                                        {/*<p className="card-text">{movie.description}</p>*/}
                                                 </div>
                                             </Link>
                                             </div>

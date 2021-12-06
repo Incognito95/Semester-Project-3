@@ -2,7 +2,6 @@ package entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -23,7 +22,7 @@ public class MovieInfo implements Serializable {
 
 
     @ManyToOne
-    private Movies movies;
+    private Movie movie;
 
     @ManyToOne
     private User user;
@@ -31,10 +30,10 @@ public class MovieInfo implements Serializable {
     public MovieInfo() {
     }
 
-    public MovieInfo(String comment, int rating, Movies movies, User user) {
+    public MovieInfo(String comment, int rating, Movie movie, User user) {
         this.comment = comment;
         this.rating = rating;
-        this.movies = movies;
+        this.movie = movie;
         this.user = user;
     }
 
@@ -63,12 +62,12 @@ public class MovieInfo implements Serializable {
     }
 
 
-    public Movies getMovies() {
-        return movies;
+    public Movie getMovies() {
+        return movie;
     }
 
-    public void setMovies(Movies movies) {
-        this.movies = movies;
+    public void setMovies(Movie movie) {
+        this.movie = movie;
     }
 
     public User getUser() {

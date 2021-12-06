@@ -1,7 +1,7 @@
 package utils;
 
 
-import entities.Movies;
+import entities.Movie;
 import entities.Role;
 import entities.User;
 
@@ -26,10 +26,10 @@ public class SetupTestUsers {
     User admin = new User("admin", "12345");
     User both = new User("user_admin", "1234");
 
-    Movies movie1 = new Movies(1L, "Dick Johnson Is Dead", "As her father nears the end of his life, filmmaker Kirsten Johnson stages his death in inventive and comical ways to help them both face the inevitable.", "dick_johnson.jpeg");
-    Movies movie2 = new Movies(2L, "Blood & Water", "After crossing paths at a party, a Cape Town teen sets out to prove whether a private-school swimming star is her sister who was abducted at birth.", "blood_water.jpg");
-    Movies movie3 = new Movies(3L, "Ganglands", "To protect his family from a powerful drug lord, skilled thief Mehdi and his expert team of robbers are pulled into a violent and deadly turf war.", "ganglands.jpg");
-    Movies movie4 = new Movies( 4L, "Jailbirds New Orleans", "Feuds, flirtations and toilet talk go down among the incarcerated women at the Orleans Justice Center in New Orleans on this gritty reality series.", "new_orleans.jpg");
+    Movie movie1 = new Movie(1L, "Dick Johnson Is Dead", "As her father nears the end of his life, filmmaker Kirsten Johnson stages his death in inventive and comical ways to help them both face the inevitable.", "dick_johnson.jpeg");
+    Movie movie2 = new Movie(2L, "Blood & Water", "After crossing paths at a party, a Cape Town teen sets out to prove whether a private-school swimming star is her sister who was abducted at birth.", "blood_water.jpg");
+    Movie movie3 = new Movie(3L, "Ganglands", "To protect his family from a powerful drug lord, skilled thief Mehdi and his expert team of robbers are pulled into a violent and deadly turf war.", "ganglands.jpg");
+    Movie movie4 = new Movie( 4L, "Jailbirds New Orleans", "Feuds, flirtations and toilet talk go down among the incarcerated women at the Orleans Justice Center in New Orleans on this gritty reality series.", "new_orleans.jpg");
 
 
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
