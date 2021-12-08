@@ -27,13 +27,16 @@ const MoviePage = () => {
             })
     }, []);
 
-    const addComment = (evt) => {
-
+    // add comment
+    const addComment = (event) => {
+        event.preventDefault(); // prevent page from reloading after submitting form
+        console.log(event.target.comment.value); // getting value from form
+        document.getElementById("comments").innerHTML = event.target.comment.value; // get value from form and show it on the page
     }
 
-    const updateComment = (evt) => {
-
-    }
+    // const updateComment = (evt) => {
+    //
+    // }
 
 
 
@@ -108,10 +111,10 @@ const MoviePage = () => {
 
 
                         <div className="comments">
-                            <form onChange={updateComment}>
+                            <form onSubmit={addComment}>
                                 <h3>Post a comment</h3>
                                 <textarea name="comment" className="form-control mt-3" id="" cols="30" rows="10" name="comment"></textarea>
-                                <button onClick={addComment} type="submit" className="btn btn-success mt-3 float-end">Send</button>
+                                <button type="submit" className="btn btn-success mt-3 float-end">Send</button>
                             </form>
                         </div>
 
@@ -119,8 +122,7 @@ const MoviePage = () => {
                             <h3>Comments</h3>
                             <div className="p-5 mb-4 bg-light mt-3">
                                     <div className="container-fluid py-5">
-                                        <p>{comments.username}</p>
-                                        <p>{comments.comment}</p>
+                                        <p id="comments"></p>
                                     </div>
                             </div>
                         </div>
