@@ -17,12 +17,12 @@ public class Movie implements Serializable {
     @NotNull
     @Column(name = "movie_id", length = 25)
     private Long id;
-    @Column(name = "title", length = 25)
+    @Column(name = "title", length = 1000)
     private String title;
     @Column(name = "description", length = 2500)
     private String description;
 
-    @Column(name = "images", length = 100)
+    @Column(name = "images", length = 1000)
     private String images;
 
     @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
