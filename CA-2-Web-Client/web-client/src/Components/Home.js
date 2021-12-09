@@ -12,8 +12,8 @@ function Home() {
 
 
             <h3 className="mt-5 instructions-header">Instructions on how to use the Quick Start Project.</h3>
-            <div class="col-md-6">
-                <div class="p-4 bg-light instructions-box">
+            <div className="col-md-6">
+                <div className="p-4 bg-light instructions-box">
                     <li className="instructions-list">Open the project in your preferred code editor</li>
                     <li className="instructions-list">Go into the terminal and input the following commands <br />(if the packages didn't come included when you downloaded the project then input the following command: <br /><code>npm install</code> then to start the project type: <code> npm start</code></li>
                     <li>Once you have typed <code>npm start</code> then the project should open in the browser</li>

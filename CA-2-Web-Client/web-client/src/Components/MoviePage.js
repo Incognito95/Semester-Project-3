@@ -3,9 +3,10 @@ import facade from "../ApiFacade";
 import { useParams } from "react-router-dom";
 
 
-const MoviePage = () => {
+const MoviePage = ({userName}) => {
 
     const [movies, setmovies] = useState([]);
+    const [comment, setComment] = useState({});
     const [comments, setComments] = useState([]);
 
     let { id } = useParams();
@@ -19,24 +20,31 @@ const MoviePage = () => {
         })
     },[])
 
-    // show comments
-    useEffect(() => {
-        facade.fetchData("DisplayMovieComments")
-            .then(data => {
-                setComments(data);
-            })
-    }, []);
-
     // add comment
     const addComment = (event) => {
         event.preventDefault(); // prevent page from reloading after submitting form
-        console.log(event.target.comment.value); // getting value from form
-        document.getElementById("comments").innerHTML = event.target.comment.value; // get value from form and show it on the page
+        const body = {"username": userName, "movieId": id, ...comment};
+        console.log("body", body);
+        facade.postData(body, "AddMovieComment").then(() => {
+            facade.fetchData("DisplayMovieComments/" + id)
+                .then(data => {
+                    setComments(data);
+                })
+        })
     }
 
-    // const updateComment = (evt) => {
-    //
-    // }
+    // show comments
+    useEffect(() => {
+        facade.fetchData("DisplayMovieComments/" + id)
+            .then(data => {
+                setComments(data);
+            })
+    }, [comment]);
+
+    const changeComment = (event) => {
+        event.preventDefault();
+        setComment({ ...comment,[event.target.id]: event.target.value });
+    }
 
 
 
@@ -111,18 +119,22 @@ const MoviePage = () => {
 
 
                         <div className="comments">
-                            <form onSubmit={addComment}>
+                            <form onChange={changeComment}>
                                 <h3>Post a comment</h3>
-                                <textarea name="comment" className="form-control mt-3" id="" cols="30" rows="10" name="comment"></textarea>
-                                <button type="submit" className="btn btn-success mt-3 float-end">Send</button>
+                                <textarea name="comment" className="form-control mt-3" id="comment" cols="30" rows="10" name="comment"></textarea>
+                                <button onClick={addComment} type="submit" className="btn btn-success mt-3 float-end">Send</button>
                             </form>
                         </div>
+
+                        comment: {JSON.stringify(comment)}
 
                         <div className="show-comments">
                             <h3>Comments</h3>
                             <div className="p-5 mb-4 bg-light mt-3">
                                     <div className="container-fluid py-5">
-                                        <p id="comments"></p>
+                                        <ul>
+                                            {comments.map(comment => <li key={comment.id}> {comment.comment}</li>)}
+                                        </ul>
                                     </div>
                             </div>
                         </div>

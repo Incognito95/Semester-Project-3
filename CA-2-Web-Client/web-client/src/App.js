@@ -26,6 +26,8 @@ import facade from "./ApiFacade";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false)
+    const [userName, setUserName] = useState("")
+
 
     const logout = () => {
         // confused on how we get this to work as it's not being called
@@ -38,6 +40,7 @@ function App() {
     }
 
     const login = (user, pass) => {
+        setUserName(user);
         facade.login(user,pass)
             .then(res =>setLoggedIn(true));
     }
@@ -65,28 +68,11 @@ function App() {
                              <MoviePage />
                         </Route>
                         <Route path="/moviepage/:id">
-                            <MoviePage />
+                            <MoviePage userName={userName}/>
                         </Route>
                         <NoMatch />
                     </Switch>
-                    <LoggedIn />
                 </div>)}
-        </div>
-    )
-
-}
-
-
-function LoggedIn() {
-    const [dataFromServer, setDataFromServer] = useState("Loading...")
-
-    useEffect(() => {
-        facade.fetchData().then(data=> setDataFromServer(data.msg));
-    }, [])
-
-    return (
-        <div>
-
         </div>
     )
 

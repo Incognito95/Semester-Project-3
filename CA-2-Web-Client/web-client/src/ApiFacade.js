@@ -38,6 +38,7 @@ function ApiFacade() {
 
     const postData = (body, endpoint) => {
         const options = makeOptions("POST",true, body); //True add's the token
+        console.log(body);
         return fetch(URL + "/api/info/" + endpoint, options).then(handleHttpErrors);
     }
 

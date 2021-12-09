@@ -1,6 +1,10 @@
 package dtos;
 
 import entities.Movie;
+import entities.MovieInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovieDTO {
 
@@ -8,13 +12,14 @@ public class MovieDTO {
     private String description;
     private String title;
     private String images;
+    private List<MovieInfoDTO> movieInfo = new ArrayList<>();
 
     public MovieDTO (Movie M) {
         this.id =  M.getId();
         this.description = M.getDescription();
         this.title = M.getTitle();
         this.images = M.getImages();
-
+        M.getMovieInfo().forEach(m -> movieInfo.add(new MovieInfoDTO(m)));
     }
 
     public MovieDTO(long id, String description, String title, String images) {

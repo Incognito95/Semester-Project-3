@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import dtos.MovieCommentDTO;
 import dtos.MovieDTO;
+import dtos.MovieInfoDTO;
 import entities.Movie;
 import entities.MovieInfo;
 import entities.User;
@@ -97,11 +98,12 @@ public class DemoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("AddMovieComment")
-    public void AddMovieComment(String jsonString) throws SQLException {
+    public String AddMovieComment(String jsonString) throws SQLException {
         System.out.println(jsonString);
         MovieCommentDTO mDTO = gson.fromJson(jsonString, MovieCommentDTO.class);
         System.out.println("Username: " + mDTO.getUsername() + " Comment: " + mDTO.getComment() + " Movie ID: " + mDTO.getMovieId() + " rating: " + mDTO.getRating());
         MOVIE_FACADE.CreateComment(mDTO);
+        return "{}";
     }
 
 
@@ -131,12 +133,21 @@ public class DemoResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("DisplayMovieComments")
-    public List<Movie> DisplayMovieComments() throws SQLException {
+    @Path("DisplayMovieComments/{id}")
+    public String DisplayMovieComments(@PathParam("id") long id) throws SQLException {
         EntityManager em = EMF.createEntityManager();
-        TypedQuery <Movie> query = em.createQuery("SELECT m FROM MovieInfo m WHERE m.comment = m.comment", Movie.class);
-        List<Movie> result = query.getResultList();
-        return result;
+        TypedQuery <MovieInfo> query = em.createQuery("SELECT m FROM MovieInfo m WHERE m.movie.id = :id", MovieInfo.class);
+        query.setParameter("id", id);
+        List<MovieInfo> result = query.getResultList();
+//        MovieDTO resultDTO = new MovieDTO(result.get(0));
+        List<MovieInfoDTO> movieInfoDTOS = new ArrayList<>();
+        for (MovieInfo movieInfo : result) {
+            movieInfoDTOS.add(new MovieInfoDTO(movieInfo));
+        }
+//        result.forEach(m -> movieInfoDTOS.add(new MovieInfoDTO(m)));
+        System.out.println("result");
+        System.out.println(gson.toJson(movieInfoDTOS));
+        return gson.toJson(movieInfoDTOS);
     }
 
 
@@ -144,11 +155,13 @@ public class DemoResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("movies")
-    public List<Movie> ShowAllMovies() throws SQLException {
+    public String ShowAllMovies() throws SQLException {
         EntityManager em = EMF.createEntityManager();
         TypedQuery <Movie> query = em.createQuery("SELECT m from Movie m", Movie.class);
         List<Movie> result = query.getResultList();
-        return result;
+        List<MovieDTO> movieDTOS = new ArrayList<>();
+        result.forEach(m -> movieDTOS.add(new MovieDTO(m)) );
+        return gson.toJson(movieDTOS);
     }
 
     @GET
@@ -191,7 +204,7 @@ public class DemoResource {
         MoviePage(1); // show one movie
         GetInfoFromUser(); // show user
         AddMovieComment("hej"); // add comment to movie
-        DisplayMovieComments(); // display comments for a movie
+        DisplayMovieComments(1); // display comments for a movie
         AddMovieRating(); // display ratings for a movie
         DisplayMovieRatings(); // display ratings for a movie
         SearchForMovie("hej");
