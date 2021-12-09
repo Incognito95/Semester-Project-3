@@ -126,16 +126,14 @@ const MoviePage = ({userName}) => {
                             </form>
                         </div>
 
-                        comment: {JSON.stringify(comment)}
+                        {/*comment: {JSON.stringify(comment)}*/}
 
                         <div className="show-comments">
                             <h3>Comments</h3>
-                            <div className="p-5 mb-4 bg-light mt-3">
-                                    <div className="container-fluid py-5">
-                                        <ul>
-                                            {comments.map(comment => <li key={comment.id}> {comment.comment}</li>)}
-                                        </ul>
-                                    </div>
+                            <div className="p-5 bg-light mt-3">
+                                            {comments.map(comment =>
+                                                <p>{comment.comment}</p>
+                                            )}
                             </div>
                         </div>
 
