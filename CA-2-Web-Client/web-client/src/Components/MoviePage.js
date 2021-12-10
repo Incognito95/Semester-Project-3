@@ -7,6 +7,7 @@ const MoviePage = ({userName}) => {
 
     const [movies, setmovies] = useState([]);
     const [comment, setComment] = useState({});
+    const [rating, setRating] = useState({});
     const [comments, setComments] = useState([]);
 
     let { id } = useParams();
@@ -33,6 +34,18 @@ const MoviePage = ({userName}) => {
         })
     }
 
+    const addRating = (event) => {
+        event.preventDefault(); // prevent page from reloading after submitting form
+        const body = {"username": userName, "movieId": id, ...rating};
+        console.log("body", body);
+        facade.postData(body, "AddMovieComment").then(() => {
+            facade.fetchData("DisplayMovieComments/" + id)
+                .then(data => {
+                    setRating(data);
+                })
+        })
+    }
+
     // show comments
     useEffect(() => {
         facade.fetchData("DisplayMovieComments/" + id)
@@ -44,6 +57,11 @@ const MoviePage = ({userName}) => {
     const changeComment = (event) => {
         event.preventDefault();
         setComment({ ...comment,[event.target.id]: event.target.value });
+    }
+
+    const changeRating = (event) => {
+        event.preventDefault();
+        setRating({ ...rating,[event.target.id]: event.target.value });
     }
 
 
@@ -78,31 +96,31 @@ const MoviePage = ({userName}) => {
                                             <p className="about">{movies.description}</p>
 
 
-                                            <form className="rating">
+                                            <form className="rating" onChange={changeRating}>
                                                 <label>
-                                                    <input type="radio" name="stars" value="1"/>
+                                                    <input type="radio" name="stars" value="1" id="rating"/>
                                                     <span className="icon">★</span>
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="stars" value="2"/>
-                                                    <span className="icon">★</span>
-                                                    <span className="icon">★</span>
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars" value="3"/>
-                                                    <span className="icon">★</span>
+                                                    <input type="radio" name="stars" value="2" id="rating"/>
                                                     <span className="icon">★</span>
                                                     <span className="icon">★</span>
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="stars" value="4"/>
-                                                    <span className="icon">★</span>
+                                                    <input type="radio" name="stars" value="3" id="rating"/>
                                                     <span className="icon">★</span>
                                                     <span className="icon">★</span>
                                                     <span className="icon">★</span>
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="stars" value="5"/>
+                                                    <input type="radio" name="stars" value="4" id="rating"/>
+                                                    <span className="icon">★</span>
+                                                    <span className="icon">★</span>
+                                                    <span className="icon">★</span>
+                                                    <span className="icon">★</span>
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="stars" value="5" id="rating"/>
                                                     <span className="icon">★</span>
                                                     <span className="icon">★</span>
                                                     <span className="icon">★</span>
@@ -110,7 +128,7 @@ const MoviePage = ({userName}) => {
                                                     <span className="icon">★</span>
                                                 </label>
                                             </form>
-
+                                            <button onClick={addRating} type="submit" className="btn btn-success mt-3 float-end">Send</button>
                                         </div>
                                     </div>
                                 </div>

@@ -107,19 +107,6 @@ public class DemoResource {
     }
 
 
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("rating")
-    public List<Movie> AddMovieRating() throws SQLException {
-        ResultSet rs = getConnection().createStatement().executeQuery("INSERT INTO movie_info SET comment = ?"); //Mangler
-        while (rs.next()) {
-            Movie movie = new Movie();
-            movie.setId(rs.getLong("movie_id"));
-            movie.setTitle(rs.getString("title"));
-            movies.add(movie);
-        }
-        return movies;
-    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -205,7 +192,7 @@ public class DemoResource {
         GetInfoFromUser(); // show user
         AddMovieComment("hej"); // add comment to movie
         DisplayMovieComments(1); // display comments for a movie
-        AddMovieRating(); // display ratings for a movie
+      //  AddMovieRating(); // display ratings for a movie
         DisplayMovieRatings(); // display ratings for a movie
         SearchForMovie("hej");
 
