@@ -15,6 +15,7 @@ public class MovieInfoDTO {
         this.id = mi.getId();
         this.comment = mi.getComment();
         this.rating = mi.getRating();
+        this.username = mi.getUser().getUserName();
 
     }
 
@@ -49,5 +50,13 @@ public class MovieInfoDTO {
     public void setRating(int rating) {
         this.rating = rating;
     }
-    
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }

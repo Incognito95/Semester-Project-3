@@ -10,6 +10,8 @@ const MoviePage = ({userName}) => {
     const [rating, setRating] = useState({});
     const [comments, setComments] = useState([]);
 
+    const [username, setUsername] = useState({}); // show username
+
     let { id } = useParams();
     console.log("id:", id);
 
@@ -25,7 +27,7 @@ const MoviePage = ({userName}) => {
     const addComment = (event) => {
         event.preventDefault(); // prevent page from reloading after submitting form
         const body = {"username": userName, "movieId": id, ...comment};
-        console.log("body", body);
+        setUsername({body})
         facade.postData(body, "AddMovieComment").then(() => {
             facade.fetchData("DisplayMovieComments/" + id)
                 .then(data => {
@@ -51,6 +53,7 @@ const MoviePage = ({userName}) => {
         facade.fetchData("DisplayMovieComments/" + id)
             .then(data => {
                 setComments(data);
+                console.log(data)
             })
     }, [comment]);
 
@@ -144,14 +147,21 @@ const MoviePage = ({userName}) => {
                             </form>
                         </div>
 
-                        {/*comment: {JSON.stringify(comment)}*/}
 
                         <div className="show-comments">
                             <h3>Comments</h3>
                             <div className="p-5 bg-light mt-3">
-                                            {comments.map(comment =>
-                                                <p>{comment.comment}</p>
-                                            )}
+                                {/*{username.map(user =>*/}
+                                {/*    <p>{user.user}</p>*/}
+                                {/*)}*/}
+
+                                {comments.map(comment =>
+                                    <div>
+                                        <p>{comment.comment}</p>
+                                        <p>{username.username}</p>
+                                    </div>
+                                )}
+
                             </div>
                         </div>
 

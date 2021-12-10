@@ -126,12 +126,10 @@ public class DemoResource {
         TypedQuery <MovieInfo> query = em.createQuery("SELECT m FROM MovieInfo m WHERE m.movie.id = :id", MovieInfo.class);
         query.setParameter("id", id);
         List<MovieInfo> result = query.getResultList();
-//        MovieDTO resultDTO = new MovieDTO(result.get(0));
         List<MovieInfoDTO> movieInfoDTOS = new ArrayList<>();
         for (MovieInfo movieInfo : result) {
             movieInfoDTOS.add(new MovieInfoDTO(movieInfo));
         }
-//        result.forEach(m -> movieInfoDTOS.add(new MovieInfoDTO(m)));
         System.out.println("result");
         System.out.println(gson.toJson(movieInfoDTOS));
         return gson.toJson(movieInfoDTOS);
