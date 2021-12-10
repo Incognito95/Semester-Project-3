@@ -155,7 +155,6 @@ const MoviePage = ({userName}) => {
                                             <p>Username: {comment.username}</p>
                                             <p>Comment: <br/>{comment.comment}</p>
                                             <p>Rating: {comment.rating}</p>
-                                            {/*<img src="" alt=""/>*/}
                                         </div>
                                 </div>
                             )}
