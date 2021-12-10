@@ -132,10 +132,6 @@ const MoviePage = ({userName}) => {
                         <div className="show-comments">
                             <h3>Comments</h3>
                             <div className="p-5 bg-light mt-3">
-                                {/*{username.map(user =>*/}
-                                {/*    <p>{user.user}</p>*/}
-                                {/*)}*/}
-
                                 {comments.map(comment =>
                                     <div>
                                         <p>Username: {comment.username}</p>
