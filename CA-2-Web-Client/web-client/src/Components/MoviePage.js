@@ -11,7 +11,7 @@ const MoviePage = ({userName}) => {
     const [username, setUsername] = useState({}); // show username
 
     let { id } = useParams();
-    console.log("id:", id);
+    // console.log("id:", id);
 
     // show movie
     useEffect(() => {
@@ -39,7 +39,7 @@ const MoviePage = ({userName}) => {
         facade.fetchData("DisplayMovieComments/" + id)
             .then(data => {
                 setComments(data);
-                console.log(data)
+                console.log(data.user);
             })
     }, [comment]);
 
@@ -138,8 +138,9 @@ const MoviePage = ({userName}) => {
 
                                 {comments.map(comment =>
                                     <div>
-                                        <p>{comment.comment}</p>
-                                        <p>{username.username}</p>
+                                        <p>Username: {comment.username}</p>
+                                        <p>Comment: <br/>{comment.comment}</p>
+                                        {/*<img src="" alt=""/>*/}
                                     </div>
                                 )}
 
