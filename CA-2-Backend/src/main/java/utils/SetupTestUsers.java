@@ -35,6 +35,7 @@ public class SetupTestUsers {
     Movie movie7 = new Movie(7L,"My Little Pony: A New Generation","Equestria's divided. But a bright-eyed hero believes Earth Ponies, Pegasi and Unicorns should be pals — and, hoof to heart, she’s determined to prove it.","my_little_pony_a_new_generation.jpg");
     Movie movie8 = new Movie(8L,"Spider-man 1","When bitten by a genetically modified spider, a nerdy, shy, and awkward high school student gains spider-like abilities that he eventually must use to fight evil as a superhero after tragedy befalls his family.","spider_man.jpg");
     Movie movie9 = new Movie(9L,"Spider-man 2","Peter Parker is beset with troubles in his failing personal life as he battles a brilliant scientist named Doctor Otto Octavius.", "spider_man_2.jpg");
+    Movie movie10 = new Movie(10L,"Pulp Fiction","In the realm of underworld, a series of incidents intertwines the lives of two Los Angeles mobsters, a gangster's wife, a boxer and two small-time criminals.", "pulp-fiction.jpeg");
 
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");
@@ -61,6 +62,7 @@ public class SetupTestUsers {
     em.persist(movie7);
     em.persist(movie8);
     em.persist(movie9);
+    em.persist(movie10);
     em.getTransaction().commit();
     System.out.println("PW: " + user.getUserPass());
     System.out.println("Testing user with OK password: " + user.verifyPassword("test"));
