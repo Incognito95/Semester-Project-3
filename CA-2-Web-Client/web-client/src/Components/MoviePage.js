@@ -5,12 +5,11 @@ import { useParams } from "react-router-dom";
 
 const MoviePage = ({userName}) => {
 
-    const [movies, setmovies] = useState([]);
-    const [comment, setComment] = useState({});
-    const [rating, setRating] = useState({});
-    const [comments, setComments] = useState([]);
-
+    const [movies, setmovies] = useState([]); // show movie
+    const [comments, setComments] = useState([]); // add rating
+    const [comment, setComment] = useState({}); // show rating
     const [username, setUsername] = useState({}); // show username
+    const [rating, setRating] = useState([]); // show rating
 
     let { id } = useParams();
     // console.log("id:", id);
@@ -150,16 +149,16 @@ const MoviePage = ({userName}) => {
 
                         <div className="show-comments">
                             <h3>Comments</h3>
-                            <div className="p-5 bg-light mt-3">
-                                {comments.map(comment =>
-                                    <div>
-                                        <p>Username: {comment.username}</p>
-                                        <p>Comment: <br/>{comment.comment}</p>
-                                        {/*<img src="" alt=""/>*/}
-                                    </div>
-                                )}
-
-                            </div>
+                            {comments.map(comment =>
+                                <div className="p-5 bg-light mt-3">
+                                        <div>
+                                            <p>Username: {comment.username}</p>
+                                            <p>Comment: <br/>{comment.comment}</p>
+                                            <p>Rating: {comment.rating}</p>
+                                            {/*<img src="" alt=""/>*/}
+                                        </div>
+                                </div>
+                            )}
                         </div>
 
                     </div>
