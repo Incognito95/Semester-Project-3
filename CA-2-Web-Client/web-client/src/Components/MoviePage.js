@@ -132,23 +132,6 @@ const MoviePage = ({userName}) => {
                                             </form>
                                             <button onClick={addRating} type="submit" className="btn btn-success mt-3 float-end">Send</button>
 
-                                            <table className="table table-striped">
-                                                <thead>
-                                                <tr>
-                                                   <th>ID</th>
-                                                   <th>Rating</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {comments.map(comment =>
-                                                <tr>
-                                                    <td>{comment.id}</td>
-                                                    <td>{comment.rating}</td>
-                                                </tr>
-                                                )}
-                                                </tbody>
-                                            </table>
-
                                         </div>
                                     </div>
                                 </div>
@@ -172,6 +155,7 @@ const MoviePage = ({userName}) => {
                                         <div>
                                             <p>Username: {comment.username}</p>
                                             <p>Comment: <br/>{comment.comment}</p>
+                                            <p>Rating: {comment.rating}</p>
                                         </div>
                                 </div>
                             )}
